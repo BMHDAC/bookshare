@@ -29,7 +29,7 @@ app.use('/', express.static(path.join(__dirname,'/public')))
 app.use('/auth',require('./routes/authRoutes'))
 app.use('/users',require('./routes/userRoutes'))
 app.use('/books',require('./routes/bookRoutes'))
-app.use('/download',require('./routes/downloadRoute'))
+
 app.use(errorHandler)
 
 mongoose.connection.once('open', () => {

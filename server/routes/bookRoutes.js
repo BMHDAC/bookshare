@@ -4,10 +4,14 @@ const router = express.Router()
 const bookController = require('../controllers/booksController')
 
 const verifyJWT = require('../middleware/verifyJWT')
+router.use(verifyJWT)
 
 router.route('/all').get(bookController.getAllBooks)
-router.use(verifyJWT)
+
 router.route('/uploads').post(upload.single('file'),bookController.uploadBook)
+router.route('/:bookId').get(bookController.downloadBookById)
+
+
 
 
 

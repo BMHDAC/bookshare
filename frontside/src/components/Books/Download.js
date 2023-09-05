@@ -7,16 +7,17 @@ const Download = () => {
 
     const download = async() => {
         try {
-          const res = await axiosPrivate.get(`/books/${bookId}`, {responseType:`blob`})
+          const res = await axiosPrivate.get(`/books/${bookId}`)
           
         } catch (error) {
           console.log(error)
         }
+        
     } 
     download()
     
   return (
-    <></>
+    <>Download</>
   )
 }
 
