@@ -112,7 +112,9 @@ const Register = () => {
                     />
                 </div>
                 <button type='submit'>Register</button>
-                <Link to='/login'>Already have an account</Link>
+                <span className="line">
+                   <Link to='/login'>Already have an account</Link>
+                </span>
 
             </form>
         </div>

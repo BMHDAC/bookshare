@@ -16,6 +16,7 @@ const uploadBook = asyncHandler(async(req,res) => {
     if(!name||!title) {
         return res.status(400).json({Error:'NO BOOK'})
     }
+    
  
     const newbook = {name,author,title,uploader,file,path}
     const uploadedbook = await Book.create(newbook)
@@ -31,7 +32,9 @@ const downloadBookById = asyncHandler(async(req,res) => {
     }
     await foundBook.save()
 
-    res.download(foundBook.path, foundBook.name)
+    let filename = foundBook.title +'.pdf'
+
+    res.download(foundBook.path, filename)
 
 })
 

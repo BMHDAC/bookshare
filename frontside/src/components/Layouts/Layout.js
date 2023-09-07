@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom"
+import pageFooter from "./pageFooter"
 
 const Layout = () => {
   return (
-    <main>
+    <>
+     <div className="App">
       <Outlet/>
-    </main>
-
+     </div>
+     <pageFooter/>
+    </>
   )
 }
 

@@ -8,7 +8,6 @@ import Bookpage from './components/Books/Bookpage';
 import PersistLogin from './components/User/PersistLogin';
 import Layout from './components/Layouts/Layout';
 import RequireAuth from './components/User/RequireAuth'
-import Download from './components/Books/Download';
 
 function App() {
   return (
@@ -23,7 +22,6 @@ function App() {
         <Route element={<RequireAuth/>}>
           <Route path="/uploads" element={<UploadBook/>}/>
           <Route path="/books" element={<Bookpage/>}/>
-          <Route path="/books/download/:bookId" element={<Download/>}/>
         </Route>
       </Route>
      </Route>

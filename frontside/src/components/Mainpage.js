@@ -1,13 +1,21 @@
 import { useNavigate, Link } from "react-router-dom";
 import useLogout from "../customHooks/useLogout";
+import useAuth from "../customHooks/useAuth";
 
 const Mainpage = () => {
     
     const navigate = useNavigate();
     const logout = useLogout()
+    const {auth} = useAuth()
     const signOut = async () => {
         await logout();
         navigate('/main')
+    }
+    let logoutButton = null
+    if (auth.accessToken) {
+        logoutButton = (
+            <button onClick={signOut}>Sign Out</button>
+        )
     }
     return (
         <section>
@@ -23,7 +31,7 @@ const Mainpage = () => {
             <br />
             <Link to="/register">Go to the register page</Link>
             <div>
-                <button onClick={signOut}>Logout </button>
+               {logoutButton}
             </div>
         </section>
     )

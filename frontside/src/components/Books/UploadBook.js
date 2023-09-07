@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import axios from 'axios'
+import axios from '../../privateApi/axios'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,8 +7,6 @@ const UploadBook = () => {
   const [name,setName] = useState("")
   const [author,setAuthor] = useState("")
   const [title,setTitle] = useState("")
-  
-
   const fileInputRef = useRef(null)
 const navigate = useNavigate()
 const handleUpload = async(e) => {
@@ -23,12 +21,12 @@ const handleUpload = async(e) => {
         console.log("Please fill in the data")
     }
     try {
-        const {data} = await axios.post('http://localhost:3008/books/uploads',formData)
+        const {data} = await axios.post('/uploads',formData)
         if(data.error) {
             toast.error(data.error)
         } else {
             console.log(data.message)
-            navigate('/main')
+            navigate('/books')
         }  
     } catch(error) {
         console.log(error)
@@ -89,7 +87,7 @@ const handleUpload = async(e) => {
                     ref={fileInputRef}
                     />
                 </div>
-                <input type='submit'></input>
+                <button type='submit'>Uploads</button>
             </form>
         </div>
     </div>
