@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import pageFooter from "./pageFooter"
+import PageFooter from "./PageFooter"
 
 const Layout = () => {
   return (
@@ -7,7 +7,7 @@ const Layout = () => {
      <div className="App">
       <Outlet/>
      </div>
-     <pageFooter/>
+     <PageFooter/>
     </>
   )
 }

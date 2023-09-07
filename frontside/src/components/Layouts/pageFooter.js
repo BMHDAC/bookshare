@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import useAuth from "../../customHooks/useAuth"
-const pageFooter = () => {
+const PageFooter = () => {
     const {auth} = useAuth()
 
     const navigate = useNavigate()
@@ -12,9 +12,11 @@ const pageFooter = () => {
 
     if(pathname !== '/main') {
         goHomeButton = (
-            <button>
+            <button
                 title="Home"
                 onClick={gohome}
+            >
+                Home
             </button>
         )
     }
@@ -30,4 +32,4 @@ const pageFooter = () => {
     return content
 }
 
-export default pageFooter
+export default PageFooter
