@@ -1,8 +1,9 @@
-import axios from 'axios'
 import { useState } from 'react'
 import {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
+import axios from '../../privateApi/axios'
+
 
 
 
@@ -22,16 +23,24 @@ const Register = () => {
             console.log("Please fill in the data")
         }
         try {
-            const {data} = await axios.post('http://localhost:3008/users/register',{username,email,password,firstname,lastname})
-            if(data.error) {
-                toast.error(data.error)
+            const response = await axios.post('/users/register',{username,email,password,firstname,lastname})
+            if(response.data.error) {
+                toast.error(response.data.error)
             } else {
                 setData({})
                 console.log('Register successfully')
                 navigate('/login')
             }  
         } catch(error) {
-            console.log(error)
+            if(!error?.response) {
+                toast.error("No server response")
+            } else if (error.response?.status === 400) {
+                toast.error("An account with this email is already existed")
+            } else if (error.response?.status === 401) {
+                toast.error("Please fill in all the form")
+            } else if (error.response?.status === 404) {
+                toast.error("Invalid data")
+            }
         }
 
         

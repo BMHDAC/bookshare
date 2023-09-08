@@ -24,7 +24,7 @@ const PageFooter = () => {
     const content = (
         <footer>
             {goHomeButton}
-            <p>Current User: {auth.email}</p>
+            <p>Current User: {auth.fullname}</p>
         </footer>
     )
 

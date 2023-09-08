@@ -44,8 +44,9 @@ const login= asycnHandler(async (req,res) =>{
         sameSite:'None',
         maxAge: 7*24*60*60*1000
     })
+    const fullname = foundUser.firstname + foundUser.lastname
 
-    res.json({accessToken})
+    res.json({accessToken, fullname})
 
 })
 

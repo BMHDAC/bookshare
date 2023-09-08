@@ -2,6 +2,7 @@ import { useRef, useState, useEffect,useContext } from 'react';
 import AuthContext from '../../context/AuthProvider';
 import useAuth from '../../customHooks/useAuth';
 import { Link, useLocation, useNavigate} from 'react-router-dom';
+import { toast } from 'react-hot-toast';
 
 import axios from '../../privateApi/axios';
 
@@ -40,21 +41,26 @@ const Login = () => {
                 }
             );
             console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
             const accessToken = response?.data?.accessToken
-            setAuth({ email, password, accessToken });
+            const fullname = response.data.fullname
+            setAuth({ email, password, accessToken, fullname });
             setEmail('');
             setPassword('');
             navigate('/main');
         } catch (err) {
             if (!err?.response) {
-                setErrMsg('No Server Response');
+                setErrMsg('No Server Response')
+                toast.error(errMsg)
+                
             } else if (err.response?.status === 400) {
                 setErrMsg('Missing Username or Password');
+                toast.error(errMsg)
             } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
+                toast.error(errMsg)
             } else {
                 setErrMsg('Login Failed');
+                toast.error(errMsg)
             }
             errRef.current.focus();
         }

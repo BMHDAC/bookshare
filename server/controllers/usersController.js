@@ -39,7 +39,7 @@ const registerUser = asycnHandler (async (req,res) => {
     const {username,email, password,firstname,lastname} = req.body
 
     if(!email ||! password||!username) {
-        return res.status(404).json({error:"Required more information"})
+        return res.status(401).json({error:"Required more information"})
     }
 
     const duplicate = await User.findOne({email}).lean().exec()

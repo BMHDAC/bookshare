@@ -7,21 +7,25 @@ const Mainpage = () => {
     const navigate = useNavigate();
     const logout = useLogout()
     const {auth} = useAuth()
+    let loginState = "Please log into your account"
     const signOut = async () => {
         await logout();
         navigate('/main')
     }
     let logoutButton = null
     if (auth.accessToken) {
+        loginState = "You are logged in"
+
         logoutButton = (
             <button onClick={signOut}>Sign Out</button>
         )
-    }
+    } 
+    
     return (
         <section>
             <h1>Home</h1>
             <br />
-            <p>loginState</p>
+            {loginState}
             <br />
             <Link to="/books">Go to the Books library</Link>
             <br />
