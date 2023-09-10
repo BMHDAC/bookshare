@@ -15,26 +15,6 @@ const getAllUsers = asycnHandler(async (req,res) => {
     
 
 })
-const loginUser = asycnHandler(async (req,res) => {
-    
-    try {
-        const {email,password} = req.body
-        const finduser = await User.findOne(({email})).lean().exec()
-        if(!finduser) {
-            return res.status(404).json({error:"No user Found"})
-        }
-
-        const matchingPwd = bcrypt.compare(password,finduser.password)
-
-
-        if(!matchingPwd) {
-            return res.status(400).json({error:"Wrong password"})
-        }
-        return res.status(200).json({message:"found user"})
-    } catch(error) {
-        console.log(error)
-    }
-})
 const registerUser = asycnHandler (async (req,res) => {
     const {username,email, password,firstname,lastname} = req.body
 
@@ -60,8 +40,6 @@ const registerUser = asycnHandler (async (req,res) => {
         res.status(404).json({error:'Invalid data'})
     }
 })
-const updateUser = asycnHandler (async (req,res) => {
-    
-})
 
-module.exports = {getAllUsers,registerUser,updateUser,loginUser}
+
+module.exports = {getAllUsers,registerUser}

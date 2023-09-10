@@ -1,13 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import axios from '../../privateApi/axios'
+import useAuth from '../../customHooks/useAuth'
+import useLogout from '../../customHooks/useLogout'
 
 
 
 
 const Register = () => {
+    const {auth} = useAuth();
+    const logout = useLogout()
+
+    useEffect( () => {
+        if (auth.accessToken) {
+             logout();
+             navigate('/register')
+            
+        }
+
+    },[])
     const [data,setData] = useState({
         username:'',
         email:'',
@@ -23,7 +36,7 @@ const Register = () => {
             console.log("Please fill in the data")
         }
         try {
-            const response = await axios.post('/users/register',{username,email,password,firstname,lastname})
+            const response = await axios.post('/auth/register',{username,email,password,firstname,lastname})
             if(response.data.error) {
                 toast.error(response.data.error)
             } else {

@@ -13,7 +13,7 @@ const BookSchema = new mongoose.Schema({
     },
     title: {
         type: String,
-        required:false
+        required:true
     },
     uploader : {
         type: mongoose.Schema.Types.ObjectId,

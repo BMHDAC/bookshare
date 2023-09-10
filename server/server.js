@@ -27,7 +27,6 @@ app.use(express.urlencoded({extended:false}))
 
 app.use('/', express.static(path.join(__dirname,'/public')))
 app.use('/auth',require('./routes/authRoutes'))
-app.use('/users',require('./routes/userRoutes'))
 app.use('/books',require('./routes/bookRoutes'))
 app.use('/',require('./routes/uploadsRoutes'))
 

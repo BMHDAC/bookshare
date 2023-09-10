@@ -75,9 +75,11 @@ const refresh =(req,res) => {
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                {expiresIn:'30s'}
+                {expiresIn:'15m'}
             )
-            res.json({accessToken})
+            let email = foundUser.email
+            let fullname = foundUser.firstname + foundUser.lastname
+            res.json({accessToken,email,fullname})
         })
     )
 }

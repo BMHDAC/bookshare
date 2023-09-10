@@ -7,19 +7,22 @@ import { toast } from 'react-hot-toast';
 import axios from '../../privateApi/axios';
 
 const Login = () => {
-    const { setAuth,persist, setPersist } = useAuth();
+    const { auth, setAuth,persist, setPersist } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
-
-
     const emailRef = useRef();
     const errRef = useRef();
-
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
+
+    useEffect(() => {
+        if(auth.accessToken) {
+            navigate('/books')
+        }
+    },[])
 
     useEffect(() => {
         emailRef.current.focus();
@@ -56,7 +59,7 @@ const Login = () => {
                 setErrMsg('Missing Username or Password');
                 toast.error(errMsg)
             } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
+                setErrMsg('Wrong account or password');
                 toast.error(errMsg)
             } else {
                 setErrMsg('Login Failed');
